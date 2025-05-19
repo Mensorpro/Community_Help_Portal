@@ -47,10 +47,10 @@ The project is organized into the following Django applications:
 ### Steps
 1.  **Clone the Repository**:
     ```bash
-    git clone <your-repository-url>
+    git clone https://github.com/Mensorpro/Community_Help_Portal
     cd community-help-portal
     ```
-    (Replace `<your-repository-url>` with the actual URL of your GitHub repository after you push it.)
+    
 
 2.  **Create and Activate a Virtual Environment**:
 
