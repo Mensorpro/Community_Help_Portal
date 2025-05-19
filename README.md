@@ -67,11 +67,8 @@ The project is organized into the following Django applications:
     ```
 
 3.  **Install Dependencies**:
-    A `requirements.txt` file should be created and included in the project. If it's not present, you can create one from your current environment:
-    ```bash
-    pip freeze > requirements.txt
-    ```
-    Then, install the dependencies:
+    A `requirements.txt` file  included in the project. This file lists all the necessary Python packages for the project.
+    To install the dependencies, run:
     ```bash
     pip install -r requirements.txt
     ```
@@ -105,6 +102,9 @@ The project is organized into the following Django applications:
     -   Authenticated users can respond to open requests (if they are not the requester).
     -   Requesters can edit or delete their own requests.
 -   **Announcements**: View a list of community announcements and their details.
+    -  Admin users can create, edit, or delete announcements.
+    
+
 -   **Profile**: Authenticated users can view their profile and edit their profile information (including profile picture).
 -   **Theme Toggle**: Use the moon/sun icon in the navbar to switch between dark and light themes.
 
