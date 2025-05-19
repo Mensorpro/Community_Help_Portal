@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import UserRegistrationForm, UserProfileEditForm, UserEditForm
 from .models import UserProfile
-from requests.models import RequestPost # Import RequestPost
+from requests.models import RequestPost, Response # Import RequestPost and Response
 
 def register(request):
     if request.method == 'POST':
@@ -31,13 +31,13 @@ def profile_view(request, username):
     # Add logic here if you want to display user's requests, responses, etc.
     # For example:
     user_requests = RequestPost.objects.filter(requester=view_user).order_by('-created_at')
-    # user_responses = Response.objects.filter(responder=view_user).order_by('-created_at') # Assuming you have a Response model
+    user_responses = Response.objects.filter(responder=view_user).order_by('-created_at') # Assuming you have a Response model
 
     context = {
         'view_user': view_user,
         'user_profile': user_profile,
         'user_requests': user_requests,
-        # 'user_responses': user_responses, # Keep this commented if Response model/logic isn't ready
+        'user_responses': user_responses,
     }
     return render(request, 'accounts/profile_view.html', context)
 

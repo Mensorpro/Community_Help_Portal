@@ -47,7 +47,7 @@ The project is organized into the following Django applications:
 ### Steps
 1.  **Clone the Repository**:
     ```bash
-    git clone https://github.com/Mensorpro/Community_Help_Portal
+    git clone https://github.com/Mensorpro/Community_Help_Portal.git 
     cd community-help-portal
     ```
     

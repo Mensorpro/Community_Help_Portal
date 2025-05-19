@@ -77,7 +77,7 @@
             <li class="list-group-item">
               Response to: <a href="{% url 'requests:request_detail' pk=resp.request_post.pk %}">{{ resp.request_post.title }}</a>
               <small class="text-muted d-block">({{ resp.created_at|date:"M d, Y" }})</small>
-              <p class="mb-0">{{ resp.content|truncatewords:20 }}</p>
+              <p class="mb-0">{{ resp.message|truncatewords:20 }}</p>
             </li>
             {% endfor %}
           </ul>
