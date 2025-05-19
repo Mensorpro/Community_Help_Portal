@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Confirm Delete{% endblock %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/request_confirm_delete.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="request-confirm-delete-container">
+    <h2>Confirm Deletion</h2>
+    <p class="confirmation-text">Are you sure you want to delete the request: "<strong>{{ request_post.title }}</strong>"?</p>
+    <p>This action cannot be undone.</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="actions">
+            <button type="submit" class="button-danger">Yes, Delete</button> {# Added button-danger class #}
+            <a href="{% url 'requests:request_detail' request_post.pk %}" class="button-secondary">No, Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

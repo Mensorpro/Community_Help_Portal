@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}Announcement Management{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/announcement_admin.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="announcement-admin-container"> {# Use the specific container class #}
+  <div class="page-header">
+      <h2>Announcement Management</h2>
+      <div class="admin-actions">
+          <a href="{% url 'announcements:announcement_create' %}" class="button-primary">Create New Announcement</a>
+      </div>
+  </div>
+
+  <div class="announcement-filters">
+    {# <h3>Filter by Status:</h3> #} {# Title for filters can be omitted if clear from context #}
+    <ul class="filter-links">
+      <li><a href="#" class="filter active" data-filter="all">All</a></li>
+      <li><a href="#" class="filter" data-filter="published">Published</a></li>
+      <li><a href="#" class="filter" data-filter="unpublished">Unpublished</a></li>
+      <li><a href="#" class="filter" data-filter="scheduled">Scheduled</a></li>
+    </ul>
+  </div>
+
+  <div class="announcements-list"> {# This div might not be strictly necessary if table is styled directly #}
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Category</th>
+          <th>Created</th>
+          <th>Published At</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for announcement in announcements %}
+        <tr class="announcement-row {% if announcement.is_published %}published{% else %}unpublished{% endif %} {% if announcement.is_published and announcement.published_at > now %}scheduled{% endif %}">
+          <td><a href="{% url 'announcements:announcement_detail' announcement.pk %}">{{ announcement.title }}</a></td>
+          <td>{{ announcement.author.username }}</td>
+          <td>{{ announcement.category.name|default:"-" }}</td>
+          <td>{{ announcement.created_at|date:"M d, Y H:i" }}</td>
+          <td>{% if announcement.published_at %}{{ announcement.published_at|date:"M d, Y H:i" }}{% else %}-{% endif %}</td>
+          <td>
+            {% if announcement.is_published %}
+              {% if announcement.published_at > now %}
+                <span class="status scheduled">Scheduled</span>
+              {% else %}
+                <span class="status published">Published</span>
+              {% endif %}
+            {% else %}
+              <span class="status unpublished">Unpublished</span>
+            {% endif %}
+          </td>
+          <td class="actions">
+            <a href="{% url 'announcements:announcement_update' announcement.pk %}" class="edit-link">Edit</a> {# Use generic class, style.css handles .actions a #}
+            <a href="{% url 'announcements:announcement_delete' announcement.pk %}" class="delete-link">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="7" style="text-align: center; padding: 20px; color: var(--dark-text-secondary);">No announcements found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  // Simple client-side filtering (remains the same)
+  document.addEventListener("DOMContentLoaded", function () {
+    const filters = document.querySelectorAll(".filter");
+    filters.forEach((filter) => {
+      filter.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        filters.forEach((f) => f.classList.remove("active"));
+        this.classList.add("active");
+
+        const filterValue = this.getAttribute("data-filter");
+        const rows = document.querySelectorAll(".announcement-row");
+
+        rows.forEach((row) => {
+          let isVisible = false;
+          if (filterValue === "all") {
+            isVisible = true;
+          } else if (filterValue === "published") {
+            if (row.classList.contains("published") && !row.classList.contains("scheduled")) isVisible = true;
+          } else if (filterValue === "unpublished") {
+            if (row.classList.contains("unpublished")) isVisible = true;
+          } else if (filterValue === "scheduled") {
+            if (row.classList.contains("scheduled")) isVisible = true;
+          }
+          row.style.display = isVisible ? "" : "none";
+        });
+      });
+    });
+  });
+</script>
+{% endblock %}

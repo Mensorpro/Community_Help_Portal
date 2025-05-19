@@ -1,0 +1,71 @@
+/* request_confirm_delete.css - Dark Theme Adaptation */
+/* This file is very similar to announcement_confirm_delete.css.
+   Consider merging into a general confirm_delete.css if identical,
+   or keep separate if there are app-specific nuances.
+   For now, adapting it similarly.
+*/
+
+.request-confirm-delete-container { /* Renamed from .container */
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 30px 35px;
+    box-sizing: border-box;
+    background-color: var(--dark-card-bg);
+    border: 1px solid var(--dark-card-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    text-align: center;
+}
+
+.request-confirm-delete-container h2 {
+    color: #ff8080; /* Lighter red for dark theme */
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.9em;
+}
+
+.request-confirm-delete-container p {
+    color: var(--dark-text-secondary);
+    font-size: 1.05em;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.request-confirm-delete-container .confirmation-text strong {
+    color: var(--dark-text-primary);
+    font-weight: 600;
+}
+
+.request-confirm-delete-container form {
+    margin-top: 20px;
+}
+
+.request-confirm-delete-container .actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Buttons will use global styles from style.css */
+/* e.g., <button type="submit" class="button-danger">Confirm Delete</button> */
+/* e.g., <a href="..." class="button-secondary">Cancel</a> */
+
+.request-confirm-delete-container .actions button[type="submit"],
+.request-confirm-delete-container .actions .button-secondary {
+    padding: 0.6rem 1.3rem; /* Consistent padding with other confirm delete */
+    font-size: 1em;
+    min-width: 120px;
+    /* font-weight: 500; */ /* Global button style has font-weight */
+    /* transition: background-color 0.2s ease-in-out, transform 0.1s ease; */ /* Global button style has transition */
+}
+
+/* Remove old button styles if fully replaced by global ones */
+/*
+button[type="submit"], .button-secondary { ... }
+button[type="submit"]:active, .button-secondary:active { ... }
+button[type="submit"] { ... }
+button[type="submit"]:hover { ... }
+.button-secondary { ... }
+.button-secondary:hover { ... }
+*/

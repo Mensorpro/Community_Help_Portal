@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Community Help Portal{% endblock %}
+
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="register-container">
+    <div class="register-form-card">
+        <h2>Create an Account</h2>
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="errorlist non-field-errors">
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="helptext">{{ field.help_text|safe }}</small> {# Added safe filter for help_text #}
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="errorlist"><li>{{ error }}</li></div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="button-success">Register</button> {# Using button-success for register #}
+        </form>
+        <div class="login-link-section">
+            <p>Already have an account? <a href="{% url 'accounts:login' %}?next={{ request.GET.next }}">Login here</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

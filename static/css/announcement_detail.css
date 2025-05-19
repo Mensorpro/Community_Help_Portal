@@ -1,0 +1,120 @@
+/* announcement_detail.css - Dark Theme Adaptation */
+
+.announcement-detail-container { /* Renamed from .container */
+    /* Inherits background from main (var(--dark-bg-secondary)) */
+    /* padding: 25px 30px; */ /* Padding from main or override here */
+    /* border-radius: 8px; */ /* From main or override */
+}
+
+.announcement-header {
+    border-bottom: 1px solid var(--dark-border-color);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.announcement-header h2 { /* Announcement Title */
+    color: var(--dark-text-primary);
+    margin: 0 0 10px 0;
+    font-size: 2.2em; /* Prominent title */
+    line-height: 1.3;
+}
+
+.announcement-meta {
+    font-size: 0.9em;
+    color: var(--dark-text-secondary);
+    margin-bottom: 10px;
+}
+
+.announcement-meta .author {
+    font-weight: 500;
+    color: var(--dark-text-primary); /* Slightly more prominent author */
+}
+.announcement-meta .author a {
+    color: var(--dark-accent-primary);
+}
+.announcement-meta .author a:hover {
+    color: var(--dark-accent-secondary);
+}
+
+
+.announcement-meta .category-tag { /* Re-using class from home.css for consistency */
+    display: inline-block;
+    background-color: var(--dark-accent-primary); /* Use accent color for category */
+    color: var(--dark-button-primary-text); /* White text on accent */
+    padding: 4px 10px;
+    border-radius: 15px; /* Pill shape */
+    font-size: 0.85em;
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.announcement-content {
+    line-height: 1.7; /* More spacious line height for readability */
+    color: var(--dark-text-primary); /* Main content text color */
+    margin-bottom: 30px;
+    font-size: 1rem; /* Standard font size for content */
+}
+.announcement-content p {
+    margin-bottom: 1.2em; /* Spacing between paragraphs */
+}
+.announcement-content strong {
+    color: var(--dark-text-primary);
+    font-weight: 600;
+}
+.announcement-content a { /* Links within content */
+    color: var(--dark-accent-primary);
+    text-decoration: underline;
+}
+.announcement-content a:hover {
+    color: var(--dark-accent-secondary);
+}
+
+.announcement-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px; /* Consistent border radius */
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 1px solid var(--dark-border-color); /* Subtle border for images */
+    background-color: var(--dark-bg-primary); /* BG for transparent images */
+}
+
+.announcement-actions {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--dark-border-color);
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap; /* Allow buttons to wrap */
+}
+/* Buttons will use global .button-primary, .button-secondary, .button-danger from style.css */
+
+
+.back-link-container { /* Wrapper for the back link for better spacing/alignment */
+    margin-top: 30px;
+    text-align: left; /* Or center, depending on design */
+}
+.back-link {
+    display: inline-block;
+    color: var(--dark-accent-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95em;
+    padding: 8px 15px;
+    border: 1px solid var(--dark-accent-primary);
+    border-radius: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.back-link:hover {
+    background-color: var(--dark-accent-primary);
+    color: var(--dark-button-primary-text);
+    text-decoration: none;
+}
+
+/* Remove old button styles if they are fully replaced by global ones */
+/*
+.button-link, a.button-link { ... }
+.button-primary { ... }
+.button-secondary { ... }
+.button-danger { ... }
+*/

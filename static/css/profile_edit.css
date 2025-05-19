@@ -1,0 +1,90 @@
+/* profile_edit.css - Styles for the profile editing page, adapted for dark theme */
+
+/* The .container here will be the main content box, inheriting dark background from `main` in style.css.
+   We can add specific padding or styling if needed, or make it a card.
+   Let's assume the form is within the main content area, not a separate card.
+*/
+
+.profile-edit-container { /* Renamed from .container */
+    padding: 20px; /* Add some padding if main doesn't have enough */
+    /* background-color: var(--dark-card-bg); /* Optional: if you want a card look */
+    /* border: 1px solid var(--dark-card-border); */
+    /* border-radius: 8px; */
+    /* box-shadow: 0 2px 8px rgba(0,0,0,0.2); */
+}
+
+.profile-edit-container h2 {
+    text-align: center;
+    color: var(--dark-text-primary);
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    border-bottom: 1px solid var(--dark-border-color);
+    padding-bottom: 10px;
+}
+
+/* Form elements will inherit from style.css */
+.profile-edit-container form {
+    margin-top: 10px;
+}
+
+.profile-edit-container form p { /* Targets Django's default <p> wrapped form fields */
+    margin-bottom: 18px;
+    /* display: flex; */ /* Removed, let default block flow or use Django Crispy Forms for better layout */
+    /* flex-direction: column; */
+}
+
+/* Labels, inputs, buttons will use global styles from style.css */
+
+.profile-edit-container form input[type="file"] {
+    /* Specific styling for file input if needed, global style.css covers basics */
+    padding: 8px; /* Adjust padding if global is not ideal */
+    background-color: var(--dark-input-bg);
+    color: var(--dark-text-secondary); /* Text like "No file chosen" */
+}
+/* Styling the file input button is tricky and browser-dependent.
+   Often, a label is styled to look like a button and linked to a hidden file input.
+   For now, we rely on browser default + basic dark theme.
+*/
+
+
+.current-profile-picture {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(255,255,255,0.03); /* Subtle bg for this section */
+    border: 1px solid var(--dark-border-color);
+    border-radius: 6px;
+}
+
+.current-profile-picture p {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--dark-text-secondary);
+    font-size: 0.95em;
+}
+
+.current-profile-picture img {
+    max-width: 150px; /* Slightly larger preview */
+    height: auto;
+    margin-top: 5px;
+    border-radius: 50%; /* Circular profile picture */
+    border: 3px solid var(--dark-border-color);
+    background-color: var(--dark-bg-secondary); /* BG for transparent images */
+}
+
+.profile-edit-container button[type="submit"] {
+    width: 100%;
+    max-width: 250px; /* Limit width of submit button */
+    display: block; /* To enable margin auto for centering */
+    margin: 25px auto 0 auto; /* Center the button */
+    padding: 0.7rem 1.5rem;
+    font-size: 1.05em;
+}
+
+/* Helper text for image upload, if any */
+.profile-edit-container .helptext {
+    font-size: 0.8em;
+    color: var(--dark-text-secondary);
+    margin-top: 5px;
+    display: block;
+}

@@ -1,0 +1,428 @@
+/* Light Theme Overrides */
+body.light-theme {
+    --background-primary: #ffffff; /* White */
+    --background-secondary: #f8f9fa; /* Very light grey */
+    --background-nav-footer: #e9ecef; /* Light grey for nav/footer */
+    --background-card: #ffffff; /* White for cards */
+    --background-input: #f1f3f5; /* Light grey for inputs */
+
+    --text-primary: #212529; /* Dark grey for main text */
+    --text-secondary: #495057; /* Medium dark grey for less important text */
+    --text-link: #007bff; /* Standard blue link */
+    --text-link-hover: #0056b3; /* Darker blue link hover */
+
+    --border-primary: #dee2e6; /* Light grey borders */
+    --border-card: #ced4da; /* Slightly darker grey for card borders */
+    --border-input: #ced4da; /* Light grey for input borders */
+    --border-input-focus: #80bdff; /* Blue focus for inputs */
+
+    --box-shadow-card: 0 0 15px rgba(0, 0, 0, 0.1); /* Lighter shadow for cards */
+    --box-shadow-input-focus: 0 0 0 0.15rem rgba(0, 123, 255, 0.25); /* Lighter focus shadow */
+}
+
+/* Ensure body tag gets the light-theme class for overrides to apply */
+body.light-theme {
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+}
+
+body.light-theme nav {
+    background: var(--background-nav-footer);
+    color: var(--text-primary);
+    border-bottom-color: var(--border-primary);
+}
+
+body.light-theme nav a,
+body.light-theme nav button[type="submit"] {
+    color: var(--text-primary); /* Ensure nav links are readable */
+}
+body.light-theme nav button#theme-toggle-btn {
+    color: var(--text-primary); /* Ensure toggle button text is readable */
+    background-color: var(--background-secondary);
+    border: 1px solid var(--border-primary);
+}
+body.light-theme nav button#theme-toggle-btn:hover {
+    background-color: var(--border-primary);
+}
+
+
+body.light-theme nav a:hover,
+body.light-theme nav button[type="submit"]:hover {
+    color: var(--text-link-hover);
+}
+
+body.light-theme main {
+    background: var(--background-secondary);
+    box-shadow: var(--box-shadow-card);
+}
+
+body.light-theme .home-page-body main {
+  background: none; /* Keep home page main transparent */
+  box-shadow: none;
+}
+
+body.light-theme footer {
+    background: var(--background-nav-footer);
+    color: var(--text-secondary);
+    border-top-color: var(--border-primary);
+}
+
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme h4,
+body.light-theme h5,
+body.light-theme h6 {
+    color: var(--text-primary);
+}
+
+body.light-theme a {
+    color: var(--text-link);
+}
+body.light-theme a:hover {
+    color: var(--text-link-hover);
+}
+
+body.light-theme label {
+    color: var(--text-secondary);
+}
+
+body.light-theme input[type="text"],
+body.light-theme input[type="email"],
+body.light-theme input[type="password"],
+body.light-theme input[type="url"],
+body.light-theme input[type="number"],
+body.light-theme input[type="date"],
+body.light-theme input[type="datetime-local"],
+body.light-theme textarea,
+body.light-theme select {
+    background-color: var(--background-input);
+    color: var(--text-primary);
+    border-color: var(--border-input);
+}
+
+body.light-theme input[type="text"]:focus,
+body.light-theme input[type="email"]:focus,
+body.light-theme input[type="password"]:focus,
+body.light-theme input[type="url"]:focus,
+body.light-theme input[type="number"]:focus,
+body.light-theme input[type="date"]:focus,
+body.light-theme input[type="datetime-local"]:focus,
+body.light-theme textarea:focus,
+body.light-theme select:focus {
+    border-color: var(--border-input-focus);
+    box-shadow: var(--box-shadow-input-focus);
+}
+
+body.light-theme select {
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23212529%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+}
+
+
+body.light-theme .button,
+body.light-theme button,
+body.light-theme input[type="submit"],
+body.light-theme input[type="button"],
+body.light-theme input[type="reset"],
+body.light-theme .button--secondary {
+    background-color: #6c757d; /* Bootstrap secondary */
+    color: #ffffff;
+    border-color: #6c757d;
+}
+body.light-theme .button:hover,
+body.light-theme button:hover,
+body.light-theme input[type="submit"]:hover,
+body.light-theme input[type="button"]:hover,
+body.light-theme input[type="reset"]:hover,
+body.light-theme .button--secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+body.light-theme .button--primary,
+body.light-theme input[type="submit"] /* Default submit to primary */ {
+    background-color: var(--text-link); /* Use link color for primary buttons */
+    color: #ffffff;
+    border-color: var(--text-link);
+}
+body.light-theme .button--primary:hover,
+body.light-theme input[type="submit"]:hover {
+    background-color: var(--text-link-hover);
+    border-color: var(--text-link-hover);
+}
+
+body.light-theme .button--danger {
+    background-color: #dc3545; /* Bootstrap danger */
+    color: #ffffff;
+    border-color: #dc3545;
+}
+body.light-theme .button--danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+body.light-theme .button--success {
+    background-color: #28a745; /* Bootstrap success */
+    color: #ffffff;
+    border-color: #28a745;
+}
+body.light-theme .button--success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+body.light-theme .button--link {
+    color: var(--text-link);
+}
+body.light-theme .button--link:hover {
+    color: var(--text-link-hover);
+}
+
+body.light-theme .errorlist {
+    color: #721c24; /* Darker red for light theme */
+}
+
+/* Request Status Specific Colors for Light Theme */
+body.light-theme .status-open {
+  color: #155724; /* Dark green */
+  background-color: #d4edda; /* Light green */
+  border-color: #c3e6cb;
+}
+
+body.light-theme .status-in-progress {
+  color: #856404; /* Dark yellow/brown */
+  background-color: #fff3cd; /* Light yellow */
+  border-color: #ffeeba;
+}
+
+body.light-theme .status-resolved {
+  color: #0c5460; /* Dark cyan */
+  background-color: #d1ecf1; /* Light cyan */
+  border-color: #bee5eb;
+}
+
+body.light-theme .status-closed {
+  color: #383d41; /* Dark grey */
+  background-color: #e2e3e5; /* Light grey */
+  border-color: #d6d8db;
+}
+
+/* Announcement Admin Table */
+body.light-theme .admin-table {
+    border-color: var(--border-card);
+}
+body.light-theme .admin-table th,
+body.light-theme .admin-table td {
+    border-color: var(--border-card);
+    color: var(--text-primary);
+}
+body.light-theme .admin-table th {
+    background-color: var(--background-nav-footer); /* Use nav footer bg for header */
+}
+body.light-theme .admin-table tr:nth-child(even) {
+    background-color: var(--background-input); /* Slightly different for even rows */
+}
+body.light-theme .admin-table tr:hover {
+    background-color: #d1e0e0; /* A distinct hover color */
+}
+
+/* Card styles for light theme */
+body.light-theme .card {
+    background-color: var(--background-card);
+    border: 1px solid var(--border-card);
+    box-shadow: var(--box-shadow-card);
+}
+body.light-theme .card-header {
+    background-color: var(--background-nav-footer);
+    border-bottom: 1px solid var(--border-card);
+}
+body.light-theme .card-footer {
+    background-color: var(--background-nav-footer);
+    border-top: 1px solid var(--border-card);
+}
+
+/* Profile view specific */
+body.light-theme .profile-details strong {
+    color: var(--text-primary);
+}
+body.light-theme .profile-details span {
+     color: var(--text-secondary);
+}
+
+/* Theme toggle button icon color for light theme */
+body.light-theme .theme-toggle-button {
+    color: var(--text-primary) !important; /* Use light theme's primary text color for the icon, ensure it applies */
+    background-color: transparent !important; /* Ensure no background in light theme either */
+    border: none !important; /* Ensure no border in light theme either */
+    /* display, padding, box-shadow, etc., are inherited from the base .theme-toggle-button style in style.css */
+    /* No need to repeat them unless specifically changing for light theme */
+}
+body.light-theme .theme-toggle-button:hover {
+    color: var(--text-link-hover) !important; /* Match link hover for consistency, ensure it applies */
+    background-color: transparent !important; /* Ensure no background on hover */
+}
+
+/* Ensure logout button in nav is styled correctly for light theme */
+body.light-theme .nav-logout-button { /* Updated selector */
+    color: var(--text-primary) !important; /* Use light theme's primary text color */
+    text-decoration: underline;
+    background: none; /* Explicitly no background */
+    border: none; /* Explicitly no border */
+    padding: 0;
+    cursor: pointer;
+}
+body.light-theme .nav-logout-button:hover {
+    color: var(--text-link-hover) !important; /* Match link hover for consistency */
+}
+/* Light Theme Hero Section Gradient */
+body.light-theme .new-hero-style {
+  background: linear-gradient(135deg, #ffadad, #ffd6a5, #fdffb6, #caffbf, #9bf6ff, #a0c4ff, #bdb2ff); /* Pastel rainbow */
+  color: #333333; /* Darker text for contrast on light pastel background */
+}
+
+body.light-theme .new-hero-style h1,
+body.light-theme .new-hero-style .hero-subtitle {
+  color: #333333; /* Ensure text within hero is dark for light theme */
+}
+
+body.light-theme .new-hero-style .button--cta-primary {
+  background-color: #007bff; /* Standard blue for primary CTA in light mode */
+  color: white;
+  border-color: #007bff;
+}
+
+body.light-theme .new-hero-style .button--cta-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+body.light-theme .new-hero-style .button--cta-secondary {
+  background-color: transparent;
+  color: #007bff; /* Blue text for secondary CTA */
+  border: 2px solid #007bff;
+}
+
+body.light-theme .new-hero-style .button--cta-secondary:hover {
+  background-color: rgba(0, 123, 255, 0.1); /* Light blue background on hover */
+  color: #0056b3;
+  border-color: #0056b3;
+}
+/* Light Theme Home Page Section Separator */
+body.light-theme .features-section {
+  border-bottom: 1px solid var(--border-primary); /* Use theme variable for separator */
+}
+/* Light Theme Content Section Overrides on Home Page */
+body.light-theme .content-section .content-card {
+    background-color: var(--background-card); /* e.g., #ffffff */
+    border-color: var(--border-card); /* e.g., #ced4da */
+    box-shadow: var(--box-shadow-card);
+}
+
+body.light-theme .content-section .content-card h2 {
+    background-color: var(--background-nav-footer); /* e.g., #e9ecef */
+    border-bottom-color: var(--border-card);
+    color: var(--text-primary); /* e.g., #212529 */
+}
+
+body.light-theme .content-section .scrollable-content {
+    /* No specific background needed if card bg is light */
+}
+
+body.light-theme .content-section .list-item {
+    border-bottom-color: var(--border-input); /* Lighter border */
+}
+
+body.light-theme .content-section .list-item:hover {
+    background-color: var(--background-input); /* e.g., #f1f3f5, a very light hover */
+}
+
+body.light-theme .content-section .list-item h4 a {
+    color: var(--text-link); /* Standard link color */
+}
+body.light-theme .content-section .list-item h4 a:hover {
+    color: var(--text-link-hover);
+}
+
+body.light-theme .content-section .list-item-meta,
+body.light-theme .content-section .list-item-excerpt {
+    color: var(--text-secondary); /* Secondary text color */
+}
+
+body.light-theme .content-section .tag,
+body.light-theme .content-section .status-tag { /* Ensure status tags are also covered if they use .tag styles */
+    background-color: var(--background-input);
+    border-color: var(--border-card);
+    color: var(--text-primary);
+}
+
+/* Overriding specific status tags if they were too dark or light */
+body.light-theme .content-section .status-open {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+body.light-theme .content-section .status-in-progress {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+body.light-theme .content-section .status-resolved {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+body.light-theme .content-section .status-closed {
+  color: #383d41;
+  background-color: #e2e3e5;
+  border-color: #d6d8db;
+}
+
+
+body.light-theme .content-section .card-footer {
+    background-color: var(--background-nav-footer);
+    border-top-color: var(--border-card);
+}
+
+body.light-theme .content-section .card-footer a.button.button--link { /* Increased specificity */
+    color: var(--text-link) !important; /* Using !important to ensure override */
+    background: none !important; /* Ensure no background from other button styles */
+    border: none !important; /* Ensure no border from other button styles */
+    text-decoration: underline !important;
+}
+body.light-theme .content-section .card-footer a.button.button--link:hover {
+    color: var(--text-link-hover) !important;
+}
+
+body.light-theme .content-section .empty-state {
+    color: var(--text-secondary);
+}
+body.light-theme .content-section .empty-state a {
+    color: var(--text-link);
+}
+body.light-theme .content-section .empty-state a:hover {
+    color: var(--text-link-hover);
+}
+
+/* Features section text colors for light theme */
+body.light-theme .features-section .feature-card h3 {
+    color: var(--text-primary);
+}
+body.light-theme .features-section .feature-card p {
+    color: var(--text-secondary);
+}
+body.light-theme .features-section .feature-icon {
+    color: var(--text-primary);
+}
+
+/* CTA Section text colors for light theme */
+body.light-theme .cta-section {
+    background: var(--background-secondary); /* Lighter background for CTA */
+    border-top-color: var(--border-primary);
+    color: var(--text-primary);
+}
+body.light-theme .cta-section h2 {
+     color: var(--text-primary);
+}
+body.light-theme .cta-section p {
+     color: var(--text-secondary);
+}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}{{ announcement.title }}{% endblock %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/announcement_detail.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="announcement-detail-container">
+    <div class="announcement-header">
+        <h2>{{ announcement.title }}</h2>
+        <div class="announcement-meta">
+            <span>Published: {{ announcement.published_at|date:"F d, Y, P" }}</span>
+            {% if announcement.author %}
+                <span class="author-meta"> | By: <a href="{% url 'accounts:profile_view' username=announcement.author.username %}">{{ announcement.author.username }}</a></span>
+            {% endif %}
+            {% if announcement.category %}
+                <span class="category-tag">{{ announcement.category.name }}</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="announcement-content">
+        {{ announcement.content|safe|linebreaksbr }} {# Assuming content can contain safe HTML #}
+    </div>
+
+    {% if user.is_authenticated and user.is_superuser %}
+    <div class="announcement-actions">
+        <a href="{% url 'announcements:announcement_update' announcement.pk %}" class="button-primary">Edit</a>
+        <a href="{% url 'announcements:announcement_delete' announcement.pk %}" class="button-danger">Delete</a>
+    </div>
+    {% endif %}
+    <div class="back-link-container">
+        <a href="{% url 'announcements:announcement_list' %}" class="back-link">&laquo; Back to Announcements</a>
+    </div>
+</div>
+{% endblock %}

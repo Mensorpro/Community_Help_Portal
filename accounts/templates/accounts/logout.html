@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block title %}Logged Out - Community Help Portal{% endblock %} {% load static %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/logout.css' %}" />
+{% endblock %} {% block content %}
+<div class="logout-container">
+  <h2>Logged Out</h2>
+  <p>You have been successfully logged out.</p>
+  <p><a href="{% url 'accounts:login' %}" class="button button--primary">Login again</a></p>
+</div>
+{% endblock %}

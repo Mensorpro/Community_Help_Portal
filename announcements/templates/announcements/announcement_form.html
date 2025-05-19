@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ form_title|default:"Manage Announcement" }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/announcement_form.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="announcement-form-container">
+    <h2>{{ form_title|default:"Manage Announcement" }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        {# Render fields individually for better control with new global form styles #}
+        {% for field in form %}
+            <div class="form-group"> {# Or use <p> if you prefer, but div gives more styling flexibility #}
+                {{ field.label_tag }}
+                {% if field.field.widget.input_type == 'checkbox' %}
+                    <div class="checkbox-field">
+                        {{ field }} <span>{{ field.label }}</span> {# Re-render label text if not part of widget #}
+                    </div>
+                {% else %}
+                    {{ field }}
+                {% endif %}
+                {% if field.help_text %}
+                    <small class="helptext">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <div class="errorlist"><li>{{ error }}</li></div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <div class="form-actions">
+            <a href="{% if announcement %}{% url 'announcements:announcement_detail' announcement.pk %}{% else %}{% url 'announcements:announcement_list' %}{% endif %}" class="button-secondary">Cancel</a>
+            {% if user.is_superuser and not announcement.is_published %} {# Show Publish Now only if not already published #}
+                <button type="submit" name="publish_now" class="button-success">Publish Now</button> {# Use button-success class #}
+            {% endif %}
+            <button type="submit" class="button-primary">
+                {% if announcement %}Save Changes{% else %}Create Announcement{% endif %}
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

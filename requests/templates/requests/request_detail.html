@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}{{ request_post.title }}{% endblock %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/request_detail.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="request-detail-page-container">
+    <div class="request-main-content">
+        <div class="request-header">
+            <h2>{{ request_post.title }}</h2>
+            <div class="request-meta">
+                <span class="author-meta">Posted by: <a href="{% url 'accounts:profile_view' username=request_post.requester.username %}">{{ request_post.requester.username }}</a></span>
+                <span>on {{ request_post.created_at|date:"M d, Y, P" }}</span>
+                {% if request_post.category %}<span class="category-tag">{{ request_post.category.name }}</span>{% endif %}
+                <span class="status-badge status-{{ request_post.status }}">{{ request_post.get_status_display }}</span>
+                {% if request_post.updated_at|timesince:request_post.created_at != "0 minutes" %} {# More robust check for update #}
+                    <small class="text-muted" style="width:100%; margin-top: 5px;">Last updated: {{ request_post.updated_at|date:"M d, Y, P" }} ({{ request_post.updated_at|timesince }} ago)</small>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="request-description">
+            {{ request_post.description|safe|linebreaksbr }} {# Assuming description can be rich text #}
+        </div>
+
+        <div class="request-actions">
+            {% if request.user == request_post.requester %}
+                <a href="{% url 'requests:request_update' request_post.pk %}" class="button-warning">Edit Request</a>
+                <a href="{% url 'requests:request_delete' request_post.pk %}" class="button-danger">Delete Request</a>
+            {% endif %}
+            {# Example: A button for users to offer help, could link to a form or trigger an action #}
+            {% if request.user.is_authenticated and request.user != request_post.requester and request_post.status == 'open' %}
+                 <a href="#add-response" class="button-success">Offer Help / Respond</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="responses-section" id="responses">
+        <h3>Responses ({{ responses.count }})</h3>
+        {% for response in responses %}
+        <article class="response-item"> {# Changed div to article #}
+            <div class="response-meta">
+               <span class="author-meta">By: <a href="{% url 'accounts:profile_view' username=response.responder.username %}">{{ response.responder.username }}</a></span>
+               <span>on {{ response.created_at|date:"M d, Y, P" }}</span>
+            </div>
+            <div class="response-content">
+                {{ response.message|safe|linebreaksbr }} {# Assuming response message can be rich text #}
+            </div>
+        </article>
+        {% empty %}
+            <p class="no-responses">No responses yet. {% if request.user.is_authenticated and request.user != request_post.requester and request_post.status == 'open' %}Be the first to help!{% elif not request.user.is_authenticated %}Log in to respond.{% endif %}</p>
+        {% endfor %}
+
+        {% if request.user.is_authenticated %}
+            <div class="add-response-form" id="add-response">
+                <h4>Add Your Response</h4>
+                <form method="post" action="{% url 'requests:request_detail' pk=request_post.pk %}"> {# Post to the detail view itself #}
+                    {% csrf_token %}
+                    {{ response_form.message.label_tag }}
+                    {{ response_form.message }}
+                    {% if response_form.message.help_text %}
+                    <small class="helptext">{{ response_form.message.help_text }}</small>
+                    {% endif %}
+                    {% for error in response_form.message.errors %}
+                    <div class="errorlist"><li>{{ error }}</li></div>
+                    {% endfor %}
+                    <button type="submit" class="button-primary" style="margin-top:10px;">Submit Response</button>
+                </form>
+            </div>
+        {% else %}
+            <p style="margin-top:20px;"><a href="{% url 'accounts:login' %}?next={{ request.path }}#add-response">Log in</a> to add a response.</p>
+        {% endif %}
+    </div>
+    <div class="back-link-container">
+        <a href="{% url 'requests:request_list' %}" class="back-link">&laquo; Back to All Requests</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,107 @@
+/* login.css - Styles for the login page, adapted for dark theme */
+
+/* The .container class here is specific to the login page's structure,
+   if it's meant to be the main content box, it will inherit dark background from `main` in style.css.
+   If it's a card-like element on the page, it needs specific dark theme styling.
+   Assuming the form itself is the "card".
+*/
+
+/* Remove body, html from here as it's handled by style.css */
+
+.login-container { /* Renamed from .container to avoid conflict if .container is global */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center form horizontally */
+    padding: 20px; /* Padding around the form area */
+    box-sizing: border-box;
+}
+
+.login-form-card { /* This will be the styled card for the form */
+    width: 100%;
+    max-width: 420px; /* Slightly wider form */
+    margin-top: 30px; /* Space from top or header */
+    padding: 25px 30px; /* Inner padding for the card */
+    border: 1px solid var(--dark-card-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background-color: var(--dark-card-bg);
+}
+
+.login-form-card h2 {
+    text-align: center;
+    color: var(--dark-text-primary);
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+/* Form elements will inherit from style.css, but we can add specifics if needed */
+.login-form-card form p {
+    margin-bottom: 18px; /* Spacing between form fields */
+}
+
+/* Labels, inputs, and buttons will largely use styles from style.css's form section */
+/* Ensure button[type="submit"] in style.css covers this or add specific class */
+.login-form-card button[type="submit"] {
+    width: 100%; /* Make button full width of its container */
+    padding: 0.7rem 1.5rem; /* Consistent padding */
+    font-size: 1.05em; /* Slightly larger font for main action */
+}
+
+
+/* Messages styling for dark theme */
+.messages {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto; /* Centered messages block */
+    width: 100%;
+    max-width: 420px; /* Match form width */
+}
+
+.messages li {
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 0.95em;
+}
+
+.messages li.success {
+    background-color: rgba(40, 167, 69, 0.2); /* Translucent green */
+    color: #a3d9b1; /* Light green text */
+    border-color: rgba(40, 167, 69, 0.5);
+}
+
+.messages li.error {
+    background-color: rgba(220, 53, 69, 0.2); /* Translucent red */
+    color: #f0a8b0; /* Light red text */
+    border-color: rgba(220, 53, 69, 0.5);
+}
+
+.messages li.info {
+    background-color: rgba(23, 162, 184, 0.2); /* Translucent teal/blue */
+    color: #a1d9e3; /* Light teal/blue text */
+    border-color: rgba(23, 162, 184, 0.5);
+}
+
+.messages li.warning {
+    background-color: rgba(255, 193, 7, 0.2); /* Translucent yellow */
+    color: #ffe187; /* Light yellow text */
+    border-color: rgba(255, 193, 7, 0.5);
+}
+
+/* Link for "Forgot password?" or "Register" if placed near the form */
+.form-footer-links {
+    text-align: center;
+    margin-top: 20px;
+}
+.form-footer-links a {
+    color: var(--dark-accent-primary);
+    font-size: 0.9em;
+    margin: 0 10px;
+}
+.form-footer-links a:hover {
+    color: var(--dark-accent-secondary);
+}

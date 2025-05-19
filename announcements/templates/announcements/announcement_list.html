@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Community Announcements{% endblock %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/announcement_list.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="announcement-list-container">
+    <div class="page-header">
+        <h2>Community Announcements</h2>
+        {% if user.is_authenticated and user.is_superuser %}
+            <a href="{% url 'announcements:announcement_create' %}" class="button-primary">Create New Announcement</a> {# Changed to button-primary #}
+        {% endif %}
+    </div>
+
+    <div class="filters-section">
+        <form method="get" action="{% url 'announcements:announcement_list' %}">
+            <label for="category_select">Filter by Category:</label>
+            <select name="category" id="category_select" onchange="this.form.submit()">
+                <option value="">All Announcements</option>
+                {% for cat in categories %}
+                <option value="{{ cat.slug }}" {% if current_category_slug == cat.slug %}selected{% endif %}>
+                    {{ cat.name }}
+                </option>
+                {% endfor %}
+            </select>
+            {# Optional: Add a visible submit button if JS is disabled or for clarity #}
+            {# <button type="submit" class="button-secondary">Filter</button> #}
+        </form>
+    </div>
+
+    {% if current_category_name %}
+        <h3 style="text-align:center; margin-bottom:20px; color: var(--dark-text-secondary);">Displaying: {{ current_category_name }}</h3>
+    {% endif %}
+
+    <div class="announcements-list-items"> {# Renamed for clarity from announcements-list #}
+        {% for announcement in announcements %}
+        <article class="announcement-item"> {# Changed div to article for semantics #}
+            <h3><a href="{% url 'announcements:announcement_detail' announcement.pk %}">{{ announcement.title }}</a></h3>
+            <div class="announcement-meta">
+                <span>Published: {{ announcement.published_at|date:"M d, Y, P" }}</span>
+                {% if announcement.author %}
+                    <span class="author-meta"> | By: <a href="{% url 'accounts:profile_view' username=announcement.author.username %}">{{ announcement.author.username }}</a></span>
+                {% endif %}
+                {% if announcement.category %}
+                    <span class="category-tag">{{ announcement.category.name }}</span>
+                {% endif %}
+            </div>
+            <div class="announcement-excerpt">
+                <p>{{ announcement.content|striptags|truncatewords_html:35|linebreaksbr }}</p> {# Added striptags, truncatewords_html #}
+            </div>
+            <a href="{% url 'announcements:announcement_detail' announcement.pk %}" class="read-more-link">Read More</a>
+        </article>
+        {% empty %}
+            <p class="no-announcements">No announcements found{% if current_category_name %} in category "{{ current_category_name }}"{% endif %}.</p>
+        {% endfor %}
+    </div>
+
+    {% if is_paginated %}
+    <nav class="pagination" aria-label="Announcements navigation"> {# Changed div to nav for semantics #}
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page=1" aria-label="First page">&laquo; First</a>
+                <a href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ page_obj.previous_page_number }}" aria-label="Previous page">Previous</a>
+            {% endif %}
+
+            <span class="current-page" aria-current="page">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ page_obj.next_page_number }}" aria-label="Next page">Next</a>
+                <a href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ page_obj.paginator.num_pages }}" aria-label="Last page">Last &raquo;</a>
+            {% endif %}
+        </span>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}

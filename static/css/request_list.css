@@ -1,0 +1,210 @@
+/* request_list.css - Dark Theme Adaptation */
+/* This file is very similar to announcement_list.css.
+   Consider merging into a general object_list.css if identical,
+   or keep separate if there are app-specific nuances.
+   For now, adapting it similarly.
+*/
+
+.request-list-container { /* Renamed from .container */
+    /* Inherits background from main (var(--dark-bg-secondary)) */
+    /* padding: 20px; */ /* Padding from main or override here */
+    /* border-radius: 8px; */ /* From main or override */
+}
+
+.page-header { /* Shared style, ensure consistency */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--dark-border-color);
+}
+
+.page-header h2 {
+    color: var(--dark-text-primary);
+    margin: 0;
+    font-size: 1.9em;
+}
+/* "Create New" button will use .button-primary from style.css */
+
+.filters-section { /* Wrapper for the filters area */
+    margin-bottom: 25px;
+    padding: 18px 20px;
+    background-color: var(--dark-card-bg);
+    border: 1px solid var(--dark-card-border);
+    border-radius: 6px;
+}
+
+.filters-section form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+
+.filters-section label {
+    font-weight: 500;
+    color: var(--dark-text-secondary);
+    font-size: 0.95em;
+    margin-right: 5px;
+}
+
+/* Filter inputs (select, text) will use global styles from style.css */
+.filters-section select,
+.filters-section input[type="text"] {
+    min-width: 160px; /* Give filters some base width */
+}
+
+/* Filter button will use .button-primary or .button-secondary from style.css */
+.filters-section button[type="submit"] {
+    padding: 0.5rem 1rem;
+    font-size: 0.9em;
+}
+
+
+.request-item {
+    background-color: var(--dark-card-bg);
+    border: 1px solid var(--dark-card-border);
+    border-radius: 6px;
+    padding: 20px 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.request-item:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    transform: translateY(-3px);
+}
+
+.request-item h3 { /* Title of the request item */
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.request-item h3 a {
+    color: var(--dark-accent-primary);
+    text-decoration: none;
+    font-size: 1.4em;
+    line-height: 1.3;
+}
+
+.request-item h3 a:hover {
+    color: var(--dark-accent-secondary);
+    text-decoration: underline;
+}
+
+.request-meta { /* Meta info: author, date, category, status */
+    font-size: 0.85em;
+    color: var(--dark-text-secondary);
+    margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; /* Vertically align items in meta */
+    gap: 10px 15px; /* Row and column gap */
+}
+
+.request-meta .author-meta a { /* Ensure author link is styled */
+    color: var(--dark-text-primary);
+    font-weight: 500;
+}
+.request-meta .author-meta a:hover {
+    color: var(--dark-accent-primary);
+}
+
+.request-meta .status-badge { /* Using status-badge from request_detail.css */
+    display: inline-block;
+    padding: 3px 10px; /* Slightly smaller padding for list view */
+    border-radius: 12px; /* Pill shape */
+    font-size: 0.9em; /* Relative to parent .request-meta */
+    font-weight: 500;
+    color: var(--dark-button-primary-text);
+    line-height: 1.4;
+    text-align: center;
+}
+.request-meta .status-badge.status-open { background-color: var(--dark-status-open); }
+.request-meta .status-badge.status-in_progress { background-color: var(--dark-status-in-progress); color: var(--dark-text-primary); }
+.request-meta .status-badge.status-resolved { background-color: var(--dark-status-resolved); }
+.request-meta .status-badge.status-closed { background-color: var(--dark-status-closed); }
+
+
+.request-meta .category-tag { /* Using consistent category tag style */
+    display: inline-block;
+    background-color: var(--dark-accent-secondary);
+    color: var(--dark-button-primary-text);
+    padding: 3px 9px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.request-excerpt {
+    color: var(--dark-text-primary);
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+.request-excerpt p {
+    margin-bottom: 0.5em;
+}
+
+.read-more-link {
+    display: inline-block;
+    color: var(--dark-accent-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9em;
+    transition: color 0.2s ease;
+}
+.read-more-link:hover {
+    color: var(--dark-accent-secondary);
+    text-decoration: underline;
+}
+.read-more-link::after {
+    content: " \2192";
+}
+
+
+.no-requests {
+    text-align: center;
+    padding: 30px;
+    color: var(--dark-text-secondary);
+    font-style: italic;
+    font-size: 1.05em;
+    background-color: var(--dark-card-bg);
+    border: 1px dashed var(--dark-border-color);
+    border-radius: 6px;
+}
+
+/* Pagination Styles - consistent with announcement_list.css */
+.pagination {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.pagination .step-links a,
+.pagination .current-page { /* Changed .current to .current-page */
+    display: inline-block;
+    padding: 8px 14px;
+    margin: 0 3px;
+    border: 1px solid var(--dark-input-border);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--dark-text-secondary);
+    background-color: var(--dark-input-bg);
+    font-size: 0.9em;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.pagination .step-links a:hover {
+    background-color: var(--dark-accent-secondary);
+    border-color: var(--dark-accent-secondary);
+    color: var(--dark-button-primary-text);
+}
+
+.pagination .current-page {
+    background-color: var(--dark-accent-primary);
+    color: var(--dark-button-primary-text);
+    border-color: var(--dark-accent-primary);
+    font-weight: 600;
+}

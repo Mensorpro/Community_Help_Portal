@@ -1,0 +1,149 @@
+/* Announcement Admin Styles */
+/* .announcement-admin class seems unused if .container is used in HTML, removing for now */
+/* .container will be used from the specific page CSS or base.html structure */
+
+/* Announcement Admin Styles - Dark Theme Adaptation */
+
+/* The .container class in announcement_admin.html will use the global `main` styles from style.css.
+   The `max-width: 1400px` is specific to this admin page, so we'll apply it to a more specific class.
+*/
+.announcement-admin-container { /* Specific container for this page */
+    /* Inherits background from main (var(--dark-bg-secondary)) */
+    /* Inherits padding from main, can override if needed: padding: 25px; */
+    /* Inherits border-radius from main */
+    max-width: 1400px; /* Keep admin view wider */
+    margin: 20px auto; /* Ensure it's centered if main is full-width for home */
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--dark-border-color); /* Use theme border color */
+}
+
+.page-header h2 {
+    color: var(--dark-text-primary);
+    margin: 0;
+    font-size: 1.9em; /* Slightly larger */
+}
+/* Create New Announcement button will use .button-primary from style.css */
+
+.admin-actions { /* For "Create New" button container */
+  margin-bottom: 20px;
+}
+
+.filter-links {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+  gap: 12px;
+  flex-wrap: wrap; /* Allow filters to wrap on smaller screens */
+}
+
+.filter {
+  padding: 7px 14px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: var(--dark-button-secondary-text);
+  background-color: var(--dark-button-secondary-bg);
+  font-size: 0.9em;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border: 1px solid transparent; /* For consistency */
+}
+.filter:hover {
+    background-color: #5a5e62; /* Darken secondary button bg */
+    color: var(--dark-text-primary);
+}
+
+.filter.active {
+  background-color: var(--dark-accent-primary);
+  color: var(--dark-button-primary-text);
+  font-weight: 500;
+  border-color: var(--dark-accent-primary);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: separate; /* Use separate for better border-radius on cells if needed */
+  border-spacing: 0; /* Remove spacing if using separate */
+  margin-top: 20px;
+  font-size: 0.9rem;
+  background-color: var(--dark-card-bg); /* Table itself can have a card background */
+  border: 1px solid var(--dark-border-color);
+  border-radius: 6px; /* Rounded corners for the table */
+  overflow: hidden; /* To make border-radius work with th/td */
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 10px 12px; /* Slightly more padding */
+  text-align: left;
+  border-bottom: 1px solid var(--dark-border-color);
+}
+.admin-table tr:last-child td {
+    border-bottom: none; /* Remove border from last row cells */
+}
+
+.admin-table th {
+  background-color: rgba(255, 255, 255, 0.05); /* Slightly different header bg */
+  font-weight: 600; /* Bolder */
+  color: var(--dark-text-primary);
+  text-transform: uppercase; /* Optional: uppercase headers */
+  font-size: 0.85em;
+  letter-spacing: 0.5px;
+}
+
+.admin-table tr {
+    transition: background-color 0.15s ease;
+}
+.admin-table tr:hover td { /* Hover on td to avoid issues with border-collapse */
+  background-color: rgba(255, 255, 255, 0.04); /* Subtle hover for rows */
+}
+
+.actions a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: var(--dark-accent-primary);
+    font-weight: 500;
+    font-size: 0.95em;
+}
+.actions a:hover {
+    color: var(--dark-accent-secondary);
+    text-decoration: underline;
+}
+.actions a.delete-link {
+    color: #ff8080; /* Lighter red for delete */
+}
+.actions a.delete-link:hover {
+    color: #ff6666; /* Brighter red on hover */
+}
+
+
+.status {
+  padding: 5px 10px;
+  border-radius: 15px; /* Pill shape */
+  font-size: 0.8em;
+  font-weight: 500;
+  color: var(--dark-button-primary-text); /* Default white text */
+  text-align: center;
+  display: inline-block;
+  min-width: 80px;
+  line-height: 1.4; /* Ensure text fits well */
+}
+
+.status.published {
+  background-color: #28a745; /* Green */
+}
+
+.status.unpublished {
+  background-color: #dc3545; /* Red */
+}
+
+.status.scheduled {
+  background-color: #ffc107; /* Yellow */
+  color: #212529; /* Dark text for yellow */
+}

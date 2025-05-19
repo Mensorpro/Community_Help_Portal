@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Community Help Portal{% endblock %}
+
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-form-card">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="errorlist non-field-errors">
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="helptext">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="errorlist"><li>{{ error }}</li></div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="button-primary">Login</button> {# Added button-primary class #}
+        </form>
+        <div class="form-footer-links">
+            <p>Don't have an account? <a href="{% url 'accounts:register' %}?next={{ request.GET.next }}">Register here</a></p>
+            {# <p><a href="{% url 'password_reset' %}">Forgot password?</a></p> #}
+        </div>
+    </div>
+</div>
+{% endblock %}

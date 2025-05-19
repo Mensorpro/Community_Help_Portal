@@ -1,0 +1,54 @@
+/* announcement_confirm_delete.css - Dark Theme Adaptation */
+
+.confirm-delete-container { /* Renamed from .container */
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 30px 35px;
+    box-sizing: border-box;
+    background-color: var(--dark-card-bg); /* Card background */
+    border: 1px solid var(--dark-card-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    text-align: center;
+}
+
+.confirm-delete-container h2 {
+    color: #ff8080; /* Lighter, more prominent red for dark theme */
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.9em;
+}
+
+.confirm-delete-container p {
+    color: var(--dark-text-secondary);
+    font-size: 1.05em;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.confirmation-text strong { /* For the item name being deleted */
+    color: var(--dark-text-primary); /* Make it stand out */
+    font-weight: 600;
+}
+
+.confirm-delete-container form {
+    margin-top: 20px;
+}
+
+.actions { /* Container for buttons */
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Buttons will use global styles from style.css */
+/* e.g., <button type="submit" class="button-danger">Confirm Delete</button> */
+/* e.g., <a href="..." class="button-secondary">Cancel</a> */
+
+.actions button[type="submit"],
+.actions .button-secondary { /* Ensure consistent sizing if needed */
+    padding: 0.6rem 1.3rem;
+    font-size: 1em;
+    min-width: 120px;
+}

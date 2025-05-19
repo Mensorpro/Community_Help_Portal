@@ -1,0 +1,452 @@
+/* Modern home page styling with professional gradient design */
+
+/* Reset styles to ensure accurate viewport measurements */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Special body style for home page only */
+.home-page-body {
+  background: linear-gradient(135deg, var(--background-primary) 0%, #1a1c1d 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0; /* Remove padding - the hero should start at the top */
+}
+
+/* Make sure the main content area fills available space */
+.home-page-body main {
+  max-width: none;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  flex: 1 0 auto; /* This is critical - grow but don't shrink */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Ensure no overflow from content */
+  margin-top: 0 !important; /* Ensure no margin at the top */
+}
+
+/* Ensure the home-page-wrapper fills the main area completely */
+.home-page-wrapper {
+  color: var(--text-primary);
+  width: 100%;
+  position: relative;
+  overflow-x: hidden; /* To prevent horizontal scrollbar from glow effects */
+  display: flex;
+  flex-direction: column;
+  min-height: 100%; /* Fill the entire main area */
+  flex: 1;
+}
+
+/* Add subtle glow at edges similar to Cursor website */
+.home-page-wrapper::before,
+.home-page-wrapper::after {
+  content: "";
+  position: absolute;
+  width: 40vw;
+  height: 40vw;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.08;
+  filter: blur(100px);
+}
+
+.home-page-wrapper::before {
+  background: radial-gradient(circle, rgba(128, 0, 128, 0.6) 0%, transparent 70%);
+  top: 60vh;
+  left: -20vw;
+}
+
+.home-page-wrapper::after {
+  background: radial-gradient(circle, rgba(0, 0, 128, 0.6) 0%, transparent 70%);
+  top: 150vh;
+  right: -20vw;
+}
+
+/* Hero Section - Large impactful header area */
+.hero-section {
+  /* background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.75) 100%), radial-gradient(circle at bottom right, rgba(128, 0, 128, 0.2), transparent 70%), radial-gradient(circle at bottom left, rgba(0, 0, 128, 0.2), transparent 70%); */
+  height: 90vh; /* Adjusted height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px 20px; /* Adjusted padding to push content down a bit from navbar */
+  position: relative;
+  overflow: hidden;
+  margin-bottom: -1px; /* Avoid gap between sections */
+  box-sizing: border-box; /* Ensure padding doesn't add to the height */
+}
+
+/* New styles for the Cursor-like hero section */
+.new-hero-style {
+  background: linear-gradient(135deg, #6A0DAD, #001F3F, #004D40, #FF8C00, #C71585, #4B0082, #2E0854); /* Deeper, jewel-toned rainbow for dark mode */
+  /* Colors: Deep Purple, Navy Blue, Dark Teal, Dark Orange, Medium Violet Red, Indigo, Darker Purple */
+  color: #ffffff; /* White text for better contrast */
+  z-index: 1; /* Ensure hero background is above wrapper glows */
+}
+
+.new-hero-style .hero-content {
+  max-width: 900px; /* Slightly wider content area */
+}
+
+.new-hero-style h1 {
+  font-size: clamp(3rem, 7vw, 5.5rem); /* Larger, more impactful headline */
+  color: #ffffff;
+  font-weight: 700; /* Bold */
+  letter-spacing: -2px; /* Tighter letter spacing */
+  line-height: 1.1;
+  margin-bottom: 1.5rem; /* Spacing below headline */
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.new-hero-style .hero-subtitle {
+  font-size: clamp(1.2rem, 3vw, 1.75rem); /* Slightly larger subtitle */
+  color: #b0b0c0; /* Softer color for subtitle */
+  margin-bottom: 2.5rem; /* More space before buttons */
+  font-weight: 400;
+  max-width: 700px; /* Limit width for readability */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.new-hero-style .hero-actions {
+  margin-top: 2.5rem; /* More space above buttons */
+  gap: 1.5rem; /* Increased gap between buttons */
+}
+
+.new-hero-style .button {
+  padding: 0.85rem 2.5rem; /* Larger buttons */
+  font-size: 1.15rem;
+  border-radius: 8px; /* Slightly more rounded corners */
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  text-decoration: none;
+}
+
+.new-hero-style .button--cta-primary {
+  background-color: #6a40f0; /* Vibrant purple for primary CTA */
+  color: white;
+  border: 2px solid #6a40f0;
+}
+
+.new-hero-style .button--cta-primary:hover {
+  background-color: #5830d0;
+  border-color: #5830d0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(106, 64, 240, 0.3);
+}
+
+.new-hero-style .button--cta-secondary {
+  background-color: transparent;
+  color: #e0e0e0;
+  border: 2px solid #555; /* Darker border for secondary */
+}
+
+.new-hero-style .button--cta-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #777;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+
+/* Add a subtle overlay pattern - keep if desired, or remove for cleaner look */
+.hero-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E"); */
+  /* opacity: 0.3; */ /* Commented out for a cleaner look, can be re-enabled */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero-section h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem); /* Responsive font size */
+  margin-bottom: 1.5rem;
+  color: white;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 3vw, 1.5rem); /* Responsive font size */
+  margin-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.hero-actions .button {
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-actions .button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Features Section */
+.features-section {
+  background: linear-gradient(180deg, var(--background-primary) 0%, var(--background-secondary) 100%);
+  padding: 5rem 0;
+  position: relative;
+  z-index: 1;
+  border-bottom: 1px solid var(--border-primary); /* Use theme variable for separator */
+  margin-bottom: 0; /* Ensure no extra space from the border */
+}
+
+.feature-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  opacity: 0.9;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.feature-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Content Section */
+.content-section {
+  padding: 5rem 0;
+  background: linear-gradient(180deg, var(--background-secondary) 0%, var(--background-primary) 100%);
+  position: relative;
+  z-index: 1;
+}
+
+.content-card {
+  background-color: var(--background-secondary);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-primary);
+}
+
+.content-card h2 {
+  padding: 1.5rem;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--border-primary);
+  font-size: 1.5rem;
+  color: white;
+}
+
+.scrollable-content {
+  overflow-y: auto;
+  max-height: 400px;
+  padding: 1rem;
+  flex-grow: 1;
+}
+
+.list-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.list-item h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.list-item h4 a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.list-item h4 a:hover {
+  text-decoration: underline;
+}
+
+.list-item-meta {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.list-item-excerpt {
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.tag,
+.status-tag {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
+}
+
+.status-open {
+  background-color: var(--color-success);
+}
+
+.status-in-progress {
+  background-color: var(--color-warning);
+  color: black;
+}
+
+.status-resolved {
+  background-color: var(--color-info);
+}
+
+.status-closed {
+  background-color: var(--color-secondary);
+}
+
+.empty-state {
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 2rem;
+  font-style: italic;
+}
+
+.card-footer {
+  padding: 1rem;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--border-primary);
+}
+
+.card-footer .button {
+  width: 100%;
+}
+
+/* Call To Action Section */
+.cta-section {
+  background: linear-gradient(135deg, var(--background-secondary) 0%, var(--background-primary) 100%);
+  border-top: 1px solid var(--border-primary);
+  padding: 5rem 0;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.cta-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.cta-section p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-actions .button {
+    width: 80%;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-buttons .button {
+    width: 80%;
+  }
+
+  .content-card {
+    margin-bottom: 2rem;
+  }
+
+  .scrollable-content {
+    max-height: 300px;
+  }
+}

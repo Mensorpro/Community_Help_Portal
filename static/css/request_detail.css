@@ -1,0 +1,225 @@
+/* request_detail.css - Dark Theme Adaptation */
+
+.request-detail-page-container { /* Renamed from .container to be more specific */
+    /* This container might not need specific styling if `main` from style.css handles it.
+       If it's meant to be a card itself on a different page background, then style it.
+       Assuming `main` provides the overall page background (var(--dark-bg-secondary)).
+    */
+    /* padding: 0 15px; */ /* Global main has padding */
+}
+
+.request-main-content { /* The primary box holding the request details */
+    background-color: var(--dark-card-bg);
+    padding: 25px 30px;
+    border-radius: 8px;
+    border: 1px solid var(--dark-card-border);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    margin-bottom: 30px;
+}
+
+.request-header {
+    border-bottom: 1px solid var(--dark-border-color);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.request-header h2 { /* Request Title */
+    color: var(--dark-text-primary);
+    margin: 0 0 10px 0;
+    font-size: 2.2em;
+    line-height: 1.3;
+}
+
+.request-meta {
+    font-size: 0.9em;
+    color: var(--dark-text-secondary);
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 15px; /* Row and column gap */
+}
+
+.request-meta .author-meta a { /* Changed .author to .author-meta for consistency */
+    font-weight: 500;
+    color: var(--dark-accent-primary);
+    text-decoration: none;
+}
+.request-meta .author-meta a:hover {
+    color: var(--dark-accent-secondary);
+    text-decoration: underline;
+}
+
+.request-meta .status-badge { /* Renamed .status to .status-badge */
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 15px; /* Pill shape */
+    font-size: 0.85em; /* Relative to parent .request-meta */
+    font-weight: 500;
+    color: var(--dark-button-primary-text); /* Default white text */
+    line-height: 1.4;
+    text-align: center;
+}
+/* Status specific colors */
+.status-badge.status-open { background-color: var(--dark-status-open); }
+.status-badge.status-in_progress { background-color: var(--dark-status-in-progress); color: var(--dark-text-primary); }
+.status-badge.status-resolved { background-color: var(--dark-status-resolved); }
+.status-badge.status-closed { background-color: var(--dark-status-closed); }
+
+.request-meta .category-tag { /* Using consistent category tag style */
+    display: inline-block;
+    background-color: var(--dark-accent-secondary); /* Different accent for category */
+    color: var(--dark-button-primary-text);
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+.request-description {
+    line-height: 1.7;
+    color: var(--dark-text-primary);
+    margin-bottom: 25px;
+    font-size: 1rem;
+}
+.request-description p { margin-bottom: 1.2em; }
+.request-description strong { color: var(--dark-text-primary); font-weight: 600; }
+.request-description a { color: var(--dark-accent-primary); text-decoration: underline; }
+.request-description a:hover { color: var(--dark-accent-secondary); }
+
+.request-description img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 1px solid var(--dark-border-color);
+    background-color: var(--dark-bg-primary);
+}
+
+.request-actions {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--dark-border-color);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+/* Action buttons will use global .button- styles from style.css */
+
+
+/* Responses/Comments Section */
+.responses-section {
+    background-color: var(--dark-card-bg); /* Can be same as main card or slightly different */
+    padding: 25px 30px;
+    border-radius: 8px;
+    border: 1px solid var(--dark-card-border);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    margin-top: 30px;
+}
+
+.responses-section h3 { /* "Responses" title */
+    color: var(--dark-text-primary);
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--dark-border-color);
+    padding-bottom: 10px;
+    font-size: 1.6em;
+}
+
+.response-item {
+    border: 1px solid var(--dark-border-color);
+    background-color: var(--dark-bg-secondary); /* Slightly different bg for each response item */
+    padding: 18px 20px;
+    border-radius: 6px;
+    margin-bottom: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.response-item:last-child {
+    margin-bottom: 0;
+}
+
+.response-meta {
+    font-size: 0.85em;
+    color: var(--dark-text-secondary);
+    margin-bottom: 10px;
+}
+.response-meta .author-meta a { /* Changed .author to .author-meta */
+    font-weight: 500;
+    color: var(--dark-accent-primary);
+    text-decoration: none;
+}
+.response-meta .author-meta a:hover {
+    color: var(--dark-accent-secondary);
+    text-decoration: underline;
+}
+
+.response-content {
+    line-height: 1.6;
+    color: var(--dark-text-primary);
+    font-size: 0.95rem;
+}
+.response-content p:last-child { margin-bottom: 0; }
+.response-content blockquote {
+    border-left: 3px solid var(--dark-accent-primary);
+    margin-left: 0;
+    padding-left: 15px;
+    color: var(--dark-text-secondary);
+    font-style: italic;
+}
+
+
+.add-response-form { /* Form for adding a new response */
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--dark-border-color);
+}
+.add-response-form h4 {
+    color: var(--dark-text-primary);
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+/* Textarea and button will use global styles from style.css */
+.add-response-form textarea {
+    min-height: 100px;
+    margin-bottom: 15px; /* Space before submit button */
+}
+
+
+.no-responses {
+    text-align: center;
+    color: var(--dark-text-secondary);
+    padding: 20px 0;
+    font-style: italic;
+    font-size: 1em;
+}
+
+.back-link-container {
+    margin-top: 30px;
+}
+.back-link { /* Re-using style from announcement_detail.css */
+    display: inline-block;
+    color: var(--dark-accent-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95em;
+    padding: 8px 15px;
+    border: 1px solid var(--dark-accent-primary);
+    border-radius: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.back-link:hover {
+    background-color: var(--dark-accent-primary);
+    color: var(--dark-button-primary-text);
+    text-decoration: none;
+}
+
+/* Remove old button styles if fully replaced by global ones */
+/*
+.button-link { ... }
+.button-primary { ... }
+.button-secondary { ... }
+.button-success { ... }
+.button-warning { ... }
+.button-danger { ... }
+*/

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/request_form.css' %}" />
+{% endblock %}
+
+{% block title %}
+    {% if form.instance.pk %}
+        Edit Help Request - Community Help Portal
+    {% else %}
+        Create Help Request - Community Help Portal
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="request-form-container">
+    <h2>
+        {% if form.instance.pk %}
+            Edit Help Request
+        {% else %}
+            Create New Help Request
+        {% endif %}
+    </h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        {% if form.non_field_errors %}
+            <div class="errorlist non-field-errors"> {# Added class for potential specific styling #}
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {# Render fields individually for better control with new global form styles #}
+        {% for field in form %}
+            <div class="form-group"> {# Or use <p> if you prefer #}
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                    <small class="helptext">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <div class="errorlist"><li>{{ error }}</li></div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <div class="form-actions">
+            <a href="{% if form.instance.pk %}{% url 'requests:request_detail' form.instance.pk %}{% else %}{% url 'requests:request_list' %}{% endif %}" class="button-secondary">Cancel</a>
+            <button type="submit" class="button-primary">
+                {% if form.instance.pk %}Save Changes{% else %}Create Request{% endif %}
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

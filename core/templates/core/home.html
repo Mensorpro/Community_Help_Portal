@@ -1,0 +1,119 @@
+{% extends "base.html" %} {% load static %} {% block title %}Welcome - Community Help Portal{% endblock %} {% block body_class %}home-page-body{% endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
+{% endblock %} {% block content %}
+<div class="home-page-wrapper">
+  <!-- Hero Section -->
+  <section class="hero-section new-hero-style">
+    <div class="hero-content">
+      <h1>Connect & Collaborate in Your Community</h1>
+      <p class="hero-subtitle">The easiest way to ask for help or lend a hand to your neighbors.</p>
+      <div class="hero-actions">
+        <a href="{% url 'requests:request_create' %}" class="button button--primary button--cta-primary">Get Help Now</a>
+        <a href="{% url 'requests:request_list' %}" class="button button--secondary button--cta-secondary">Offer Assistance</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-hands-helping"></i>
+            </div>
+            <h3>Community Support</h3>
+            <p>Connect with neighbors who can help solve your problems or offer your skills to help others.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-bullhorn"></i>
+            </div>
+            <h3>Stay Informed</h3>
+            <p>Get the latest announcements and updates from community organizers and officials.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-user-shield"></i>
+            </div>
+            <h3>Trusted Network</h3>
+            <p>All users are verified members of our community, ensuring a safe and reliable experience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="content-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="content-card">
+            <h2>Recent Announcements</h2>
+            <div class="scrollable-content">
+              {% if recent_announcements %} {% for announcement in recent_announcements %}
+              <div class="list-item">
+                <h4><a href="{% url 'announcements:announcement_detail' pk=announcement.pk %}">{{ announcement.title }}</a></h4>
+                <p class="list-item-meta">{{ announcement.published_at|date:"M d, Y" }} {% if announcement.category %}<span class="tag">{{ announcement.category.name }}</span>{% endif %}</p>
+                <p class="list-item-excerpt">{{ announcement.content|truncatewords_html:15|striptags }}</p>
+              </div>
+              {% endfor %} {% else %}
+              <p class="empty-state">No recent announcements.</p>
+              {% endif %}
+            </div>
+            <div class="card-footer">
+              <a href="{% url 'announcements:announcement_list' %}" class="button button--link">View All Announcements →</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="content-card">
+            <h2>Recent Help Requests</h2>
+            <div class="scrollable-content">
+              {% if recent_requests %} {% for req in recent_requests %}
+              <div class="list-item">
+                <h4><a href="{% url 'requests:request_detail' pk=req.pk %}">{{ req.title }}</a></h4>
+                <p class="list-item-meta">
+                  {{ req.created_at|date:"M d, Y" }} |
+                  <span class="status-tag status-{{ req.status }}">{{ req.get_status_display }}</span>
+                  {% if req.category %}<span class="tag">{{ req.category.name }}</span>{% endif %}
+                </p>
+                <p class="list-item-excerpt">{{ req.description|truncatewords_html:15|striptags }}</p>
+              </div>
+              {% endfor %} {% else %}
+              <p class="empty-state">No open help requests. <a href="{% url 'requests:request_create' %}">Create one?</a></p>
+              {% endif %}
+            </div>
+            <div class="card-footer">
+              <a href="{% url 'requests:request_list' %}" class="button button--link">View All Requests →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to get involved?</h2>
+      <p>Join our community efforts and start making a difference today.</p>
+      <div class="cta-buttons">
+        {% if user.is_authenticated %}
+        <a href="{% url 'requests:request_create' %}" class="button button--primary">Create a Request</a>
+        <a href="{% url 'requests:request_list' %}" class="button button--secondary">Help Others</a>
+        {% else %}
+        <a href="{% url 'accounts:login' %}" class="button button--primary">Log In</a>
+        <a href="{% url 'accounts:register' %}" class="button button--secondary">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

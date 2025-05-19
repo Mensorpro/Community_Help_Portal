@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% load static %} {% block title %}{{ view_user.username }}'s Profile - Community Help Portal{% endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile_view.css' %}" />
+{% endblock %} {% block content %}
+<div class="container profile-view-container">
+  <div class="profile-header card mb-4">
+    <div class="card-body">
+      <img src="{{ user_profile.get_profile_picture_url }}" alt="{{ view_user.username }}'s Profile Picture" class="profile-picture-large img-fluid rounded-circle mb-3" />
+      <h2>{{ view_user.get_full_name|default:view_user.username }}</h2>
+      <p class="text-muted">@{{ view_user.username }}</p>
+      {% if view_user.email %}
+      <p class="text-muted">{{ view_user.email }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if view_user == request.user %}
+  <div class="profile-actions text-center mb-4">
+    <a href="{% url 'accounts:profile_edit' %}" class="button button--primary">Edit Profile</a>
+  </div>
+  {% endif %}
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="profile-section card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">About Me</h3>
+          {% if user_profile.bio %}
+          <p>{{ user_profile.bio|linebreaksbr }}</p>
+          {% else %}
+          <p class="text-muted"><em>No bio provided yet. {% if view_user == request.user %}Click 'Edit Profile' to add one.{% endif %}</em></p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="profile-section card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">Contact Information</h3>
+          {% if user_profile.location %}
+          <p><strong>Location:</strong> {{ user_profile.location }}</p>
+          {% endif %} {% if user_profile.contact_info %}
+          <p><strong>Contact:</strong> {{ user_profile.contact_info }}</p>
+          {% endif %} {% if not user_profile.location and not user_profile.contact_info %}
+          <p class="text-muted"><em>No contact details provided.</em></p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-section user-activity card">
+    <div class="card-body">
+      <h3 class="card-title">User Activity</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Recent Requests Made</h4>
+          {% if user_requests %}
+          <ul class="list-group">
+            {% for req in user_requests|slice:":5" %}
+            <li class="list-group-item">
+              <a href="{% url 'requests:request_detail' pk=req.pk %}">{{ req.title }}</a>
+              <small class="text-muted d-block"> ({{ req.created_at|date:"M d, Y" }} - Status: {{ req.get_status_display }})</small>
+            </li>
+            {% endfor %}
+          </ul>
+          {% if user_requests.count > 5 %}
+          <p class="text-muted mt-2"><small>Showing latest 5 requests.</small></p>
+          {% endif %} {% else %}
+          <p class="text-muted"><em>{{ view_user.username }} has not made any requests yet.</em></p>
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          <h4>Recent Responses Given</h4>
+          {% if user_responses %}
+          <ul class="list-group">
+            {% for resp in user_responses|slice:":5" %}
+            <li class="list-group-item">
+              Response to: <a href="{% url 'requests:request_detail' pk=resp.request_post.pk %}">{{ resp.request_post.title }}</a>
+              <small class="text-muted d-block">({{ resp.created_at|date:"M d, Y" }})</small>
+              <p class="mb-0">{{ resp.content|truncatewords:20 }}</p>
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p class="text-muted"><em>{{ view_user.username }} has not given any responses yet.</em></p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

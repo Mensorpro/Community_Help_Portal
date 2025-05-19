@@ -1,0 +1,138 @@
+/* profile_view.css - Styles for the profile viewing page, adapted for dark theme */
+
+/* Overall container padding adjustment */
+.profile-view-container {
+  padding: var(--spacing-md) 0;
+}
+
+/* Card base styles - explicitly defined to ensure they have proper appearance */
+.profile-view-container .card {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow-md);
+  overflow: hidden; /* Ensures content respects border radius */
+  margin-bottom: var(--spacing-xl);
+}
+
+.profile-view-container .card-body {
+  padding: var(--spacing-lg);
+}
+
+/* Profile Header Card */
+.profile-header .card-body {
+  text-align: center;
+  padding-top: var(--spacing-xl); /* More breathing room at top */
+  padding-bottom: var(--spacing-xl); /* More breathing room at bottom */
+}
+
+.profile-picture-large {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 4px solid var(--color-primary); /* Use primary color for border to make it stand out */
+  background-color: var(--background-card); /* Fallback for transparent images */
+  box-shadow: var(--box-shadow-md);
+  border-radius: 50%; /* Ensure it's perfectly round */
+  margin: 0 auto var(--spacing-lg); /* Center image and add bottom margin */
+  display: block; /* Ensures centering works */
+}
+
+.profile-header h2 {
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+  font-size: 2rem; /* Define explicit size for clarity */
+  font-weight: var(--font-weight-bold);
+}
+
+/* User detail text (username, email) */
+.profile-header .text-muted {
+  color: var(--text-secondary) !important; /* Ensure it applies */
+  font-size: var(--font-size-base);
+  display: block; /* Each on its own line */
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Edit Profile button styling */
+.profile-actions {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.profile-actions .button {
+  padding: var(--spacing-sm) var(--spacing-xl); /* Wider button */
+}
+
+/* Section cards (About Me, Contact Info) */
+.profile-section .card-title {
+  color: var(--text-primary);
+  padding-bottom: var(--spacing-sm);
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.profile-section p {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.profile-section strong {
+  color: var(--text-primary);
+  font-weight: var(--font-weight-bold);
+  margin-right: var(--spacing-sm);
+}
+
+.profile-bio p {
+  white-space: pre-wrap;
+  margin-bottom: 0; /* No bottom margin needed on last paragraph */
+}
+
+/* User Activity Section */
+.user-activity h4 {
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  font-weight: var(--font-weight-bold);
+}
+
+/* List group styling */
+.user-activity .list-group {
+  margin-bottom: var(--spacing-md);
+  background-color: transparent;
+}
+
+.user-activity .list-group-item {
+  background-color: rgba(255, 255, 255, 0.05); /* Slightly lighter than card */
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.user-activity .list-group-item a {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+}
+
+.user-activity .list-group-item a:hover {
+  text-decoration: underline;
+}
+
+/* Styling for metadata text in activity lists */
+.user-activity .text-muted {
+  color: var(--text-secondary) !important;
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-xs);
+}
+
+/* Empty state styling for no activities */
+.text-muted em {
+  font-style: italic;
+  opacity: 0.8;
+}

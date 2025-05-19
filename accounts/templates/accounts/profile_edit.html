@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %} {# Assuming you might use crispy_forms later, otherwise remove #}
+
+{% block title %}Edit Profile - Community Help Portal{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile_edit.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="profile-edit-container">
+    <h2>{{ form_title|default:"Edit Profile" }}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {# Display current profile picture if it exists and is part of profile_form #}
+        {% if profile_form.instance.profile_picture %}
+        <div class="current-profile-picture">
+            <p>Current Profile Picture:</p>
+            <img src="{{ profile_form.instance.profile_picture.url }}" alt="Current profile picture">
+        </div>
+        {% endif %}
+
+        <fieldset class="mb-3">
+            <legend>User Information</legend>
+            {# Render user_form fields individually for better control if needed, or use as_p #}
+            <div class="form-group">
+                {{ user_form.username.label_tag }}
+                {{ user_form.username }}
+                {% if user_form.username.errors %}<div class="errorlist">{{ user_form.username.errors|join:", " }}</div>{% endif %}
+                {% if user_form.username.help_text %}<small class="helptext">{{ user_form.username.help_text }}</small>{% endif %}
+            </div>
+            
+            <div class="form-group">
+                {{ user_form.email.label_tag }}
+                {{ user_form.email }}
+                {% if user_form.email.errors %}<div class="errorlist">{{ user_form.email.errors|join:", " }}</div>{% endif %}
+                {% if user_form.email.help_text %}<small class="helptext">{{ user_form.email.help_text }}</small>{% endif %}
+            </div>
+            
+            <div class="form-group">
+                {{ user_form.first_name.label_tag }}
+                {{ user_form.first_name }}
+                {% if user_form.first_name.errors %}<div class="errorlist">{{ user_form.first_name.errors|join:", " }}</div>{% endif %}
+            </div>
+            
+            <div class="form-group">
+                {{ user_form.last_name.label_tag }}
+                {{ user_form.last_name }}
+                {% if user_form.last_name.errors %}<div class="errorlist">{{ user_form.last_name.errors|join:", " }}</div>{% endif %}
+            </div>
+        </fieldset>
+        
+        <fieldset class="mb-3">
+            <legend>Profile Details</legend>
+            {# Render profile_form fields individually for better control #}
+            <div class="form-group">
+                {{ profile_form.bio.label_tag }}
+                {{ profile_form.bio }}
+                {% if profile_form.bio.errors %}<div class="errorlist">{{ profile_form.bio.errors|join:", " }}</div>{% endif %}
+                {% if profile_form.bio.help_text %}<small class="helptext">{{ profile_form.bio.help_text }}</small>{% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ profile_form.profile_picture.label_tag }}
+                {{ profile_form.profile_picture }}
+                {% if profile_form.profile_picture.errors %}<div class="errorlist">{{ profile_form.profile_picture.errors|join:", " }}</div>{% endif %}
+                {% if profile_form.profile_picture.help_text %}<small class="helptext">{{ profile_form.profile_picture.help_text }}</small>{% endif %}
+            </div>
+        </fieldset>
+        
+        <div class="form-actions"> {# Removed inline styles, rely on CSS #}
+            <a href="{% url 'accounts:profile_view' username=request.user.username %}" class="button-secondary">Cancel</a>
+            <button type="submit" class="button-primary">Save Changes</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

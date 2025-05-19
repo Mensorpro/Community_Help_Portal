@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Community Help Portal{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/fix-taskbar.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" /> <!-- ADDED BACK FONT AWESOME -->
+    <link rel="stylesheet" href="{% static 'css/light-theme.css' %}" id="light-theme-style" disabled />
+    {% block extra_css %}{% endblock %}
+  </head>  <body class="{% if request.resolver_match.url_name == 'home' %}home-page-body{% endif %} {% block body_class %}{% endblock %}">
+    <nav>
+      <div class="nav-container">
+        <a href="{% url 'core:home' %}">Home</a> |
+        <a href="{% url 'requests:request_list' %}">Requests</a> |
+        <a href="{% url 'announcements:announcement_list' %}">Announcements</a> |
+        {% if user.is_authenticated %}
+          <a href="{% url 'accounts:profile_view' username=user.username %}">Profile</a> |
+          {% if user.is_superuser %}
+            <a href="{% url 'announcements:announcement_admin' %}">Announcement Admin</a> |
+          {% endif %}
+          <form id="logout-form" method="post" action="{% url 'accounts:logout' %}" style="display: inline">
+            {% csrf_token %}
+            <button type="submit" class="button--link nav-logout-button">Logout ({{ user.username }})</button>
+          </form>
+        {% else %}
+          <a href="{% url 'accounts:register' %}">Register</a> |
+          <a href="{% url 'accounts:login' %}">Login</a>
+        {% endif %}
+        <button id="theme-toggle-btn" class="theme-toggle-button" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i><i class="fas fa-sun" style="display:none;"></i> Theme
+        </button>
+      </div>
+    </nav>
+
+    <main>{% block content %} {% endblock %}</main>
+
+    <footer>
+      <p>&copy; {% now "Y" %} Community Help Portal. All rights reserved.</p>
+    </footer>
+
+    <script>
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      const lightThemeStyle = document.getElementById('light-theme-style');
+      const moonIcon = themeToggleBtn.querySelector('.fa-moon');
+      const sunIcon = themeToggleBtn.querySelector('.fa-sun');
+      const currentTheme = localStorage.getItem('theme');
+
+      function enableLightTheme() {
+        lightThemeStyle.removeAttribute('disabled');
+        localStorage.setItem('theme', 'light');
+        document.body.classList.add('light-theme');
+        document.body.classList.remove('dark-theme');
+        moonIcon.style.display = 'none';
+        sunIcon.style.display = 'inline-block';
+      }
+
+      function enableDarkTheme() {
+        lightThemeStyle.setAttribute('disabled', 'true');
+        localStorage.setItem('theme', 'dark');
+        document.body.classList.add('dark-theme');
+        document.body.classList.remove('light-theme');
+        moonIcon.style.display = 'inline-block';
+        sunIcon.style.display = 'none';
+      }
+
+      if (currentTheme === 'light') {
+        enableLightTheme();
+      } else {
+        enableDarkTheme(); // Default to dark theme
+      }
+
+      themeToggleBtn.addEventListener('click', () => {
+        if (document.body.classList.contains('dark-theme')) { // Or check lightThemeStyle.hasAttribute('disabled')
+          enableLightTheme();
+        } else {
+          enableDarkTheme();
+        }
+      });
+    </script>
+  </body>
+</html>

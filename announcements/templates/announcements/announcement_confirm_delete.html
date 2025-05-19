@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Confirm Delete Announcement{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/announcement_confirm_delete.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="confirm-delete-container">
+    <h2>Confirm Deletion</h2>
+    <p class="confirmation-text">Are you sure you want to delete the announcement: "<strong>{{ announcement.title }}</strong>"?</p>
+    <p>This action cannot be undone.</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="actions">
+            <button type="submit" class="button-danger">Yes, Delete</button> {# Added button-danger class #}
+            <a href="{% if 'announcement_admin' in request.META.HTTP_REFERER %}{% url 'announcements:announcement_admin' %}{% else %}{% url 'announcements:announcement_detail' announcement.pk %}{% endif %}" class="button-secondary">No, Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+/* Fix for the taskbar gap in Windows */
+:root {
+  --system-bar-height: 0px;
+  --nav-height: 50px; /* Define the nav height for consistent usage */
+}
+
+html {
+  border-top-width: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+body {
+  border-top-width: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+nav {
+  border-top-width: 0 !important;
+  margin-top: 0 !important;
+  top: 0 !important;
+  height: var(--nav-height) !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 var(--spacing-md) !important;
+}
+
+/* Force navigation to top edge */
+@media screen {
+  nav {
+    top: var(--system-bar-height) !important;
+    position: fixed !important;
+  }
+}
+
+/* Special handling for home page with full-height hero */
+.home-page-body .hero-section {
+  padding-top: var(--nav-height) !important;
+  min-height: 100vh !important;
+}
