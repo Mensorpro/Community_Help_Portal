@@ -114,7 +114,62 @@ The project is organized into the following Django applications:
 -   Manage users, user profiles, request posts, responses, request categories, announcements, and announcement categories.
 
 ## VIII. Models and Relationships
-Unable to Render Diagram
+```mermaid
+erDiagram
+    User ||--o{ UserProfile : "has"
+    User ||--o{ RequestPost : "requester"
+    User ||--o{ Response : "responder"
+    User ||--o{ Announcement : "author"
+
+    UserProfile {
+        string bio
+        string location
+        string contact_info
+        string profile_picture
+    }
+
+    RequestCategory ||--o{ RequestPost : "category"
+    RequestCategory {
+        string name
+        string description
+    }
+
+    RequestPost {
+        string title
+        string description
+        string status
+        datetime created_at
+        datetime updated_at
+    }
+    RequestPost ||--o{ Response : "request_post"
+
+    Response {
+        string message
+        datetime created_at
+    }
+
+    AnnouncementCategory ||--o{ Announcement : "category"
+    AnnouncementCategory {
+        string name
+        string slug
+    }
+
+    Announcement {
+        string title
+        string content
+        datetime created_at
+        datetime published_at
+        bool is_published
+    }
+```
+This diagram shows the relationships between the main models:
+- A `User` can have one `UserProfile`.
+- A `User` can be the `requester` of many `RequestPost`s.
+- A `User` can be the `responder` on many `Response`s.
+- A `User` can be the `author` of many `Announcement`s.
+- A `RequestCategory` can have many `RequestPost`s.
+- A `RequestPost` can have many `Response`s.
+- An `AnnouncementCategory` can have many `Announcement`s.
 
 ## IX. Future Enhancements (Optional)
 -   Email notifications for new responses or important announcements.
